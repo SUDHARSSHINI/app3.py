@@ -21,8 +21,6 @@ csv_file_path = '/content/heart_disease_prediction.csv'
 df.to_csv(csv_file_path, index=False)
 
 print(f"Dataset created and saved to {csv_file_path}")
-pip install responsibleai
-pip install responsibleai responsibleai_dashboard
 pip install aif360
 from responsibleai import RAIInsights, FeatureMetadata
 from sklearn.model_selection import train_test_split
