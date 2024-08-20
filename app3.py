@@ -1,34 +1,13 @@
 import pandas as pd
-import numpy as np
-import os
 
-# Set random seed for reproducibility
-np.random.seed(42)
+# Specify the path to your existing CSV file
+csv_file_path = '/content/heart_disease_prediction.csv'
 
-# Create synthetic data
-data = {
-    'Age': np.random.randint(20, 80, size=50),
-    'Sex': np.random.randint(0, 2, size=50),
-    'Cholesterol': np.random.randint(150, 300, size=50),
-    'Blood Pressure': np.random.randint(80, 180, size=50),
-    'Heart Disease': np.random.randint(0, 2, size=50)
-}
+# Load the CSV file into a DataFrame
+data = pd.read_csv(csv_file_path)
 
-# Create DataFrame
-df = pd.DataFrame(data)
-
-# Directory path where the file will be saved
-directory = '/content'
-
-# Create directory if it doesn't exist
-if not os.path.exists(directory):
-    os.makedirs(directory)
-
-# Save to CSV
-csv_file_path = os.path.join(directory, 'heart_disease_prediction.csv')
-df.to_csv(csv_file_path, index=False)
-
-print(f"Dataset created and saved to {csv_file_path}")
+# Now you can work with your DataFrame 'data'
+print(data.head())
 
 
 from responsibleai import RAIInsights, FeatureMetadata
