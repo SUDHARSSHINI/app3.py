@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 # Set random seed for reproducibility
 np.random.seed(42)
@@ -16,11 +17,19 @@ data = {
 # Create DataFrame
 df = pd.DataFrame(data)
 
+# Directory path where the file will be saved
+directory = '/content'
+
+# Create directory if it doesn't exist
+if not os.path.exists(directory):
+    os.makedirs(directory)
+
 # Save to CSV
-csv_file_path = '/content/heart_disease_prediction.csv'
+csv_file_path = os.path.join(directory, 'heart_disease_prediction.csv')
 df.to_csv(csv_file_path, index=False)
 
 print(f"Dataset created and saved to {csv_file_path}")
+
 
 from responsibleai import RAIInsights, FeatureMetadata
 from sklearn.model_selection import train_test_split
@@ -217,8 +226,20 @@ print(counterfactual)
 print("Causal Insights:")
 print(causal)
 # Check columns of new data
+# Assuming 'new_data' is a DataFrame that you want to check
+# Define 'new_data' before using it
+new_data = pd.DataFrame({
+    'Age': [30, 40],
+    'Sex': ['1', '0'],  # Ensure categorical features match the encoding
+    'Cholesterol': [200, 180],
+    'Blood Pressure': [120, 110]
+    # Add more columns as needed
+})
+
+# Now you can check the columns
 print("Columns in new data:", new_data.columns)
 print("Columns expected by the model:", preprocessor.get_feature_names_out())
+
 
 pipeline.fit(X_train, y_train)
 from sklearn.compose import ColumnTransformer
